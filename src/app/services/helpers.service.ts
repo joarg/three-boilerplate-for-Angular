@@ -1,13 +1,24 @@
 import { Injectable } from '@angular/core';
 import * as THREE from 'three';
 import { LightsService } from './lights.service';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+import * as dat from 'dat.gui'
+import { ObjectService } from './object.service';
 @Injectable({
   providedIn: 'root'
 })
 export class HelpersService {
+  gui!: dat.GUI;
 
-  constructor(private lightService: LightsService) { }
+  options = {
+    boxColor: '#00ff00',
+    wireFrame: false
+  }
+
+  constructor(
+    private lightService: LightsService,
+    private objectService: ObjectService
+    ) { }
   createGridAndLightHelper() {
 
     //grid helper
@@ -26,5 +37,17 @@ export class HelpersService {
     orbit.target.set(0, 0, 0);
     orbit.update();
     return orbit;
+  }
+  createDatGUI() {
+    this.gui = new dat.GUI();
+
+    this.gui.addColor(this.options, 'boxColor').onChange((color) => {
+      this.objectService.box.material.color.set(color);
+    })
+
+    this.gui.add(this.options, 'wireFrame').onChange((wireFrame) => {
+      this.objectService.box.material.wireframe = wireFrame;
+    })
+    return this.gui;
   }
 }

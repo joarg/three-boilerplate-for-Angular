@@ -14,7 +14,7 @@ export class ObjectService {
 
   createPlane() {
     //plne geometry and material
-    const planeGeometry = new THREE.PlaneGeometry(1, 1, 1, 1);
+    const planeGeometry = new THREE.PlaneGeometry(1, 1);
     const planeMaterial = new THREE.MeshStandardMaterial({
       color: THREE.Color.NAMES['pink'],
       side: THREE.DoubleSide,

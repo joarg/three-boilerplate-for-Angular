@@ -35,6 +35,8 @@ export class SceneComponent {
     this.scene.add(this.objectService.createPlane());
     this.scene.add(this.objectService.createBox());
 
+    this.helperService.createDatGUI();
+
     this.cameraService.setCameraPosition(0, 1, 3);
     this.renderService.renderScene(this.scene, this.cameraService.camera)
 
